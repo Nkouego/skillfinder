@@ -1,0 +1,6 @@
+<web-app version="6.0"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee">
+
+  <display-name>SkillFinder</display-name>
+
+</web-app>
