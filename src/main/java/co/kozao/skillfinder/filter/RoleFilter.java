@@ -1,7 +1,5 @@
 package co.kozao.skillfinder.filter;
 
-import java.io.IOException;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -10,8 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter({"/login", "/dashboard"})
-public class AuthFilter extends HttpFilter {
+import java.io.IOException;
+
+import co.kozao.skillfinder.dto.AuthDto.AuthResponse;
+import co.kozao.skillfinder.enums.UserRole;
+
+@WebFilter("/admin/*")
+public class RoleFilter extends HttpFilter {
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -22,24 +26,20 @@ public class AuthFilter extends HttpFilter {
 
         HttpSession session = request.getSession(false);
 
-        boolean authenticated = session != null
-                && session.getAttribute("user") != null;
+        AuthResponse user = (session != null)
+                ? (AuthResponse) session.getAttribute("user")
+                : null;
 
-        String path = request.getServletPath();
-
-        // Utilisateur déjà connecté qui veut accéder au login
-        if (authenticated && path.equals("/login")) {
-            response.sendRedirect(request.getContextPath() + "/dashboard");
-            return;
-        }
-
-        // Utilisateur non connecté qui veut accéder au dashboard
-        if (!authenticated && path.equals("/dashboard")) {
+        if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // Laisser passer la requête
+        if (!UserRole.ADMIN_RH.name().equals(user.getRole())) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
+
         chain.doFilter(request, response);
     }
 }
