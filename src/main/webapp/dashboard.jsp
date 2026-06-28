@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<a href="${pageContext.request.contextPath}/logout">
+    Déconnexion
+</a>
 </body>
 </html>

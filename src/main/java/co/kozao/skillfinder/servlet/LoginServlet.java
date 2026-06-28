@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", authResponse);
 				
-	            response.sendRedirect(request.getContextPath() + "/dashboard");
+	            response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
 			} else {
 				request.setAttribute("authError", authResponse.getMessage());
 				request.setAttribute("email", email);
