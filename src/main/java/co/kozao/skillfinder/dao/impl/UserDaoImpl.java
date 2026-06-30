@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import co.kozao.skillfinder.config.Database;
+import co.kozao.skillfinder.config.DBConnection;
 import co.kozao.skillfinder.dao.UserDao;
 import co.kozao.skillfinder.entities.User;
 import co.kozao.skillfinder.enums.UserRole;
 
 public class UserDaoImpl implements UserDao{
-	private final Connection conn = Database.getInstance().getConnection();
+	private final Connection conn = DBConnection.getInstance().getConnection();
 	
 	@Override
 	public User findByEmail(String email) {

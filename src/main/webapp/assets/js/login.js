@@ -1,22 +1,16 @@
-lucide.createIcons();
-
 const passwordInput = document.getElementById("password");
 const toggleButton = document.getElementById("togglePassword");
+const icon = document.getElementById("passwordIcon");
 
-toggleButton.addEventListener("click", () => {
+toggleButton.addEventListener("click", (event) => {
+    event.preventDefault(); 
 
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+    const isHidden = passwordInput.type === "password";
+    passwordInput.type = isHidden ? "text" : "password";
+
+    if (isHidden) {
+        icon.classList.replace("fa-eye-slash", "fa-eye");
     } else {
-        passwordInput.type = "password";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
     }
-
-    const icon = document.getElementById("passwordIcon");
-
-    icon.setAttribute(
-        "data-lucide",
-        passwordInput.type === "password" ? "eye" : "eye-off"
-    );
-
-    lucide.createIcons();
 });
