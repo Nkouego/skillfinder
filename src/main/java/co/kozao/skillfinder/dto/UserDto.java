@@ -1,10 +1,12 @@
 package co.kozao.skillfinder.dto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import co.kozao.skillfinder.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -22,11 +24,12 @@ public class UserDto {
 		@Email(message = "L'email est invalide")	
 		String email,
 		
-		@NotBlank(message = "Le role est obligatoire")		
+		@NotNull(message = "Le rôle est obligatoire")		
 		UserRole role
 	) {}
 	
 	public static record UpdateUserRequest(
+			UUID id,
 			
 			String fullName,
 				
@@ -50,5 +53,11 @@ public class UserDto {
 		 String email;
 		
 		 String role;
+		 
+		 String message;
+		 
+		 String createdAt;
+		 
+		 boolean success;
 	}
 }

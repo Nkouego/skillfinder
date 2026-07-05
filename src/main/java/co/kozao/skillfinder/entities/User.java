@@ -24,5 +24,5 @@ public class User {
 	
 	private UserRole role;
 	
-	private LocalDateTime date;
+	private LocalDateTime createdAt;
 }
