@@ -11,18 +11,14 @@ public class AuthDto {
 	
 	@Getter
 	@Builder
-	public static class AuthResponse{
-		 UUID id;
-		
-		 String fullName;
-		
-		 String email;
-		
-		 String role;
-		 
-		 String message;
-		 
-		 boolean success;
+	public static class AuthResponse {
+
+	    private UUID id;
+	    private String fullName;
+	    private String email;
+	    private String role;
+	    private String message;
+	    private boolean success;
 	}
 	
 	@Builder

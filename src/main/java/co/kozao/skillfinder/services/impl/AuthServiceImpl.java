@@ -40,7 +40,8 @@ public class AuthServiceImpl implements AuthService {
 					.build();
 		}
 				
-		return AuthResponse.builder()
+		return AuthResponse
+				.builder()
 				.id(user.getId())
 				.email(user.getEmail())
 				.fullName(user.getFullName())
